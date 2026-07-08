@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personal Expense Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app" id="app">
+
+        <!-- HEADER -->
+        <header class="app-header">
+            <h1>💰 Expense<span>Tracker</span></h1>
+            <div class="header-actions">
+                <button class="btn-export" id="exportCsvBtn">📤 Export CSV</button>
+                <button class="btn-clear" id="clearAllBtn">🗑 Clear All</button>
+            </div>
+        </header>
+
+        <!-- FORM -->
+        <section class="form-section" id="formSection">
+            <h2 id="formTitle">➕ Add New Expense</h2>
+            <form id="expenseForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="title">Expense Title *</label>
+                        <input type="text" id="title" placeholder="e.g. Lunch" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount (BDT) *</label>
+                        <input type="number" id="amount" placeholder="0.00" min="0.01" step="0.01" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" required>
+                            <option value="">Select</option>
+                            <option value="Food">Food</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Expense Date *</label>
+                        <input type="date" id="date" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="payment">Payment Method *</label>
+                        <select id="payment" required>
+                            <option value="">Select</option>
+                            <option value="Cash">Cash</option>
+                            <option value="bKash">bKash</option>
+                            <option value="Nagad">Nagad</option>
+                            <option value="Card">Card</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-add" id="addBtn">➕ Add Expense</button>
+                        <button type="button" class="btn-update hidden" id="updateBtn">✏️ Update Expense</button>
+                        <button type="reset" class="btn-reset" id="resetBtn">↺ Reset Form</button>
+                        <span class="edit-indicator hidden" id="editIndicator">✏️ Editing: <span id="editTitleDisplay"></span></span>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="summary-section" id="summarySection">
+            <div class="summary-card">
+                <div class="label">Total Expenses</div>
+                <div class="value" id="totalExpenses">0.00</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">Transactions</div>
+                <div class="value" id="totalTransactions">0</div>
+            </div>
+            <div class="summary-card highlight">
+                <div class="label">Highest</div>
+                <div class="value positive" id="highestExpense">0.00</div>
+            </div>
+            <div class="summary-card highlight">
+                <div class="label">Lowest</div>
+                <div class="value" id="lowestExpense">0.00</div>
+            </div>
+            <div class="summary-card">
+                <div class="label">Average</div>
+                <div class="value" id="averageExpense">0.00</div>
+            </div>
+        </section>
+
+        <!-- TABLE + CHART -->
+        <div class="bottom-section">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenseTableBody">
+                        <tr class="empty-row">
+                            <td colspan="6">No expenses yet. Add one above!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- CHART -->
+            <div class="chart-container">
+                <h3>📊 By Category</h3>
+                <canvas id="pieChart" width="300" height="300"></canvas>
+                <div id="chartLegend" class="chart-legend"></div>
+                <div id="chartEmpty" class="chart-empty">No data to show</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
